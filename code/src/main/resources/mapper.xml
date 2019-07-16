@@ -1,0 +1,13 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
+       xsi:schemaLocation="
+  http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+  http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd">
+    <!-- 配置接口存储的包，用来扫描mapper接口 -->
+    <mybatis:scan base-package="com.example.code.mapper.test" />
+  <!-- <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+       &lt;!&ndash; &lt;!&ndash; 配置mapper文件位置，扫描映射文件，可以使用Ant风格的路径格式 &ndash;&gt;&ndash;&gt;
+        <property name="mapperLocations" value="classpath*:com.example.code.mapper/*.xml" />
+    </bean>-->
+</beans>

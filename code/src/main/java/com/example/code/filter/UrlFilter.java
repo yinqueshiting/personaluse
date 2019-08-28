@@ -18,6 +18,11 @@ public class UrlFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest)servletRequest;
         log.info("url:"+request.getRequestURI());
+        /*if("XMLHttpRequest".equals(request.getHeader("x-requested-with"))){
+            log.info("ajax请求");
+        }else{
+            log.info("不是ajax请求");
+        }*/
         filterChain.doFilter(servletRequest,servletResponse);
     }
 

@@ -2,6 +2,7 @@ package com.example.code.utils;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.io.Serializable;
 
@@ -10,6 +11,7 @@ import java.io.Serializable;
  */
 @Setter
 @Getter
+@ToString
 public class Result<T> implements Serializable {
     private String returnCode;
     private String returnMsg;

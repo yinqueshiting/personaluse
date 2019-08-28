@@ -7,7 +7,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
 @Component
-@ConfigurationProperties
+@ConfigurationProperties(prefix = "txt")
 @PropertySource("classpath:/txt.properties")
 @Setter
 @Getter

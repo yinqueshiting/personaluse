@@ -40,7 +40,7 @@
         <!--滚动策略-->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!--路径-->
-            <fileNamePattern>D:\weblog/error/error.%d.log</fileNamePattern>
+            <fileNamePattern>${LOG_HOME}/%d{yyyy-MM-dd,aux}/xxx.%d{yyyy-MM-dd_HH}.log</fileNamePattern>
         </rollingPolicy>
     </appender>
 

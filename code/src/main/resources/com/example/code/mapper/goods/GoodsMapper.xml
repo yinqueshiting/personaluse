@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.example.code.mapper.goods.GoodsMapper" >
+    <select id="selectGoogsList" resultType="java.util.Map">
+        select goods_id,goods_name,total_inventory from yz_goods where status = '0' limit #{page},#{rows}
+    </select>
+
+    <update id="updateGoodsInfo">
+        update yz_goods set goods_name = #{goods_name} where goods_id = #{goods_id}
+    </update>
+
+    <select id="selectInventoryByGoodsId" resultType="java.lang.String">
+        select total_inventory from yz_goods  where goods_id =#{goods_id}
+    </select>
+    <select id="selectInventoryByGoodsIdAddForUpdate" resultType="java.lang.String">
+        select total_inventory from yz_goods  where goods_id =#{goods_id} for update
+    </select>
+
+    <insert id="addOrderForThisUser">
+        insert into yz_goods_order(goods_id, count, user_id) values (#{goodsId},#{count},#{userId})
+    </insert>
+
+    <update id="reduceInventoryByGoodsId">
+        update yz_goods set total_inventory = total_inventory-#{count} where goods_id = #{goods_id}
+    </update>
+
+    <select id="forUpdateNoHaveTransation" resultType="java.util.Map">
+        select goods_name from yz_goods where goods_id = 'YG045917' for update
+    </select>
+</mapper>

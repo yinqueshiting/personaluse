@@ -1,0 +1,198 @@
+2019-09-10 15:03:56.694 [main] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Field goodsMapper in com.example.code.serviceImpl.goodsService.GoodsServiceImpl required a bean of type 'GoodsMapper' that could not be found.
+
+The injection point has the following annotations:
+	- @org.springframework.beans.factory.annotation.Autowired(required=true)
+
+
+Action:
+
+Consider defining a bean of type 'GoodsMapper' in your configuration.
+ 
+2019-09-10 15:05:13.040 [main] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Field goodsMapper in com.example.code.serviceImpl.goodsService.GoodsServiceImpl required a bean of type 'GoodsMapper' that could not be found.
+
+The injection point has the following annotations:
+	- @org.springframework.beans.factory.annotation.Autowired(required=true)
+
+
+Action:
+
+Consider defining a bean of type 'GoodsMapper' in your configuration.
+ 
+2019-09-10 15:08:59.207 [main] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Field goodsService in com.example.code.controller.GoodsController required a bean of type 'GoodsMapper' that could not be found.
+
+The injection point has the following annotations:
+	- @org.springframework.beans.factory.annotation.Autowired(required=true)
+
+
+Action:
+
+Consider defining a bean of type 'GoodsMapper' in your configuration.
+ 
+2019-09-10 15:14:46.199 [main] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Field goodsMapper in com.example.code.serviceImpl.goodsService.GoodsServiceImpl required a bean of type 'GoodsMapper' that could not be found.
+
+The injection point has the following annotations:
+	- @org.springframework.beans.factory.annotation.Autowired(required=true)
+
+
+Action:
+
+Consider defining a bean of type 'GoodsMapper' in your configuration.
+ 
+2019-09-10 15:29:54.594 [main] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Field goodsMapper in com.example.code.serviceImpl.goodsService.GoodsServiceImpl required a bean of type 'com.example.code.mapper.goods.GoodsMapper' that could not be found.
+
+The injection point has the following annotations:
+	- @org.springframework.beans.factory.annotation.Autowired(required=true)
+
+
+Action:
+
+Consider defining a bean of type 'com.example.code.mapper.goods.GoodsMapper' in your configuration.
+ 
+2019-09-10 15:31:01.070 [main] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Field goodsMapper in com.example.code.serviceImpl.goodsService.GoodsServiceImpl required a bean of type 'com.example.code.mapper.goods.GoodsMapper' that could not be found.
+
+The injection point has the following annotations:
+	- @org.springframework.beans.factory.annotation.Autowired(required=true)
+
+
+Action:
+
+Consider defining a bean of type 'com.example.code.mapper.goods.GoodsMapper' in your configuration.
+ 
+2019-09-10 15:32:18.644 [main] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Field goodsMapper in com.example.code.serviceImpl.goodsService.GoodsServiceImpl required a bean of type 'com.example.code.mapper.goods.GoodsMapper' that could not be found.
+
+The injection point has the following annotations:
+	- @org.springframework.beans.factory.annotation.Autowired(required=true)
+
+
+Action:
+
+Consider defining a bean of type 'com.example.code.mapper.goods.GoodsMapper' in your configuration.
+ 
+2019-09-10 15:36:08.709 [main] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Field goodsMapper in com.example.code.serviceImpl.goodsService.GoodsServiceImpl required a bean of type 'com.example.code.mapper.goods.GoodsMapper' that could not be found.
+
+The injection point has the following annotations:
+	- @org.springframework.beans.factory.annotation.Autowired(required=true)
+
+
+Action:
+
+Consider defining a bean of type 'com.example.code.mapper.goods.GoodsMapper' in your configuration.
+ 
+2019-09-10 15:44:34.394 [main] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Field goodsMapper in com.example.code.serviceImpl.goods.GoodsServiceImpl required a bean of type 'com.example.code.mapper.goods.GoodsMapper' that could not be found.
+
+The injection point has the following annotations:
+	- @org.springframework.beans.factory.annotation.Autowired(required=true)
+
+
+Action:
+
+Consider defining a bean of type 'com.example.code.mapper.goods.GoodsMapper' in your configuration.
+ 
+2019-09-10 15:46:51.262 [main] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Field goodsService in com.example.code.controller.GoodsController required a bean of type 'com.example.code.mapper.goods.GoodsMapper' that could not be found.
+
+The injection point has the following annotations:
+	- @org.springframework.beans.factory.annotation.Autowired(required=true)
+
+
+Action:
+
+Consider defining a bean of type 'com.example.code.mapper.goods.GoodsMapper' in your configuration.
+ 
+2019-09-10 15:47:42.521 [main] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Field goodsMapper in com.example.code.serviceImpl.goods.GoodsServiceImpl required a bean of type 'com.example.code.mapper.goods.GoodsMapper' that could not be found.
+
+The injection point has the following annotations:
+	- @org.springframework.beans.factory.annotation.Autowired(required=true)
+
+
+Action:
+
+Consider defining a bean of type 'com.example.code.mapper.goods.GoodsMapper' in your configuration.
+ 

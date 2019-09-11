@@ -7,9 +7,9 @@ package com.example.code.config;
  * 测试导入resource中的xml文件
  */
 @Configuration
-@ImportResource("classpath:mapper.xml")
+//@ImportResource({"classpath:mapper.xml","classpath:generator.xml"})
 public class MyBatisXml {
-    public void test(){
-        System.out.print("不知道干什么");
+    public static void main(String[] args) {
+        System.out.println("??");
     }
 }

@@ -8,7 +8,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 
 @Configuration
 public class AsyncPoolTaskExecutor {
-    @Bean(name = "asyncPoolTaskExecutor")
+
     public ThreadPoolTaskExecutor getAsyncThreadPoolTaskExecutor() {
         ThreadPoolTaskExecutor taskExecutor = new ThreadPoolTaskExecutor();
 

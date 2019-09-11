@@ -1,0 +1,18 @@
+2019-09-04 11:55:13.016 [main] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Field testMapper in com.example.code.serviceImpl.RestServiceImpl required a bean of type 'com.example.code.mapper.test.TestMapper' that could not be found.
+
+The injection point has the following annotations:
+	- @org.springframework.beans.factory.annotation.Autowired(required=true)
+
+
+Action:
+
+Consider defining a bean of type 'com.example.code.mapper.test.TestMapper' in your configuration.
+ 

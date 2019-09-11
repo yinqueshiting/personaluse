@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import java.util.List;
 import java.util.Map;
 
@@ -24,11 +25,11 @@ public class TestController {
     @Autowired
     private RedisService redisService;
 
-    @PostMapping("/test")
+    /*@PostMapping("/test")
     public Result test(@RequestBody Map paramMap){
       Map resMap = testService.test();
       return Result.success(resMap);
-    }
+    }*/
 
     @PostMapping("/findUserById")
     public Result findUserById(@RequestBody Map<String,Integer> paramMap) {
@@ -65,7 +66,6 @@ public class TestController {
     public Result redisTest(){
         try {
              return redisService.redisTest();
-
         } catch (Exception e) {
             e.printStackTrace();
         }

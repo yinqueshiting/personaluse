@@ -1,5 +1,7 @@
 package com.example.code.utils;
 
+import lombok.Data;
+
 public class CodeMsg {
     /**
      * 执行成功
@@ -17,4 +19,8 @@ public class CodeMsg {
      * 已经存在该元素
      */
     public static String ELSMENT_IS_EXISTS = "0003";
+    /**
+     * 已经存在该元素
+     */
+    public static String NO_HAVE_INVENTORY = "0004";
 }

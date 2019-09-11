@@ -25,8 +25,8 @@ public class Result<T> implements Serializable {
     public static Result error() {
         return new Result(CodeMsg.EXCEPTION,"失败");
     }
-    public static Result error(Object date) {
-        return new Result(CodeMsg.EXCEPTION,"失败",date);
+    public static Result error(String returnCode,String returnMsg) {
+        return new Result(returnCode,returnMsg);
     }
 
     public Result(String returnCode,String returnMsg){

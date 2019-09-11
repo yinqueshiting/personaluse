@@ -16,4 +16,5 @@ public class TexProperties {
     private String  exception;
     private String param_is_null;
     private String element_is_exists;
+    private String no_hava_iinventory;
 }

@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface TestService {
-    Map test();
+    //Map test();
 
     List<User> findUserListByMeetId(String meet_id);
 

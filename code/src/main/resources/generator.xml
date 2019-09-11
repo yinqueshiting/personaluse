@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+
+    <context id="prod">
+        <!-- RowBounds pagination -->
+        <plugin type="org.mybatis.generator.plugins.RowBoundsPlugin" />
+        <plugin type="org.mybatis.generator.plugins.CaseInsensitiveLikePlugin" />
+        <!-- <plugin type="org.mybatis.generator.plugins.SerializablePlugin" /> -->
+
+        <!-- 		<commentGenerator>
+                    <property name="suppressDate" value="true" />
+                    关闭自动生成的注释
+                    <property name="suppressAllComments" value="true" />
+                </commentGenerator> -->
+        <commentGenerator type="mybatis.MyCommentGenerator">
+        </commentGenerator>
+        <!--数据库链接地址账号密码 -->
+
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+
+                        connectionURL="jdbc:mysql://192.168.1.30:3306/test?useUnicode=true"
+
+                        userId="root" password="123456">
+        </jdbcConnection>
+        <javaModelGenerator targetPackage="com.example.entity"
+
+                            targetProject="src/main/java">
+
+            <!-- 是否针对string类型的字段在set的时候进行trim调用 -->
+
+            <property name="trimStrings" value="true" />
+
+            <property name="rootClass" value="com.common.entity" />
+
+        </javaModelGenerator>
+
+        <!-- <sqlMapGenerator targetPackage="mappers" targetProject="src/main/java"
+
+            /> <javaClientGenerator targetPackage="com.mybatis.mapper" targetProject="src/main/java"
+
+            type="XMLMAPPER" /> -->
+
+
+
+
+
+        <!-- type="ANNOTATEDMAPPER",生成基于注解的Mapper接口
+
+                type="MIXEDMAPPER",生成最小的基于注解的Mapper接口
+
+                type="XMLMAPPER",生成SQLMap XML文件和独立的Mapper接口 -->
+
+        <!--        <javaClientGenerator type="ANNOTATEDMAPPER" targetPackage="com.fosunlive.amm.domain.entity" targetProject="src/main/java">
+
+                   <property name="enableSubPackages" value="ture"/>
+
+               </javaClientGenerator> -->
+
+
+
+
+
+        <table tableName="yz_goods" domainObjectName="Goods">
+
+            <ignoreColumn column="create_time" delimitedColumnName="" />
+
+            <ignoreColumn column="update_time" delimitedColumnName="" />
+
+            <ignoreColumn column="delflag" delimitedColumnName="" />
+
+        </table>
+
+
+
+
+
+
+
+    </context>
+
+</generatorConfiguration>

@@ -15,7 +15,7 @@ import java.util.concurrent.Future;
 public class AsyncTest01Impl implements AsyncTest01 {
 
     @Override
-    @Async
+    @Async("asyncPoolTaskExecutor")
     public void AsyncTest01() throws Exception {
       log.info("接口实现类开始");
       Thread.sleep(5000);
@@ -23,7 +23,7 @@ public class AsyncTest01Impl implements AsyncTest01 {
     }
 
     @Override
-    @Async
+    @Async("asyncPoolTaskExecutor")
     public Future<Result> AsyncHaveReturn() throws Exception {
         log.info("带有返回值的异步开启");
         Thread.sleep(10000);

@@ -8,6 +8,12 @@ import java.util.List;
 import java.util.Map;
 
 public interface UserService {
-    Result findUserById(int id)throws Exception;
+   // Result findUserById(int id)throws Exception;
     Result findUserReturnMap(String name);
+
+    Result seelctUserDetails(User userMap)throws Exception;
+
+    Result updateUserDetails(User user)throws Exception;
+
+    Result addUserInfo(User user)throws Exception;
 }

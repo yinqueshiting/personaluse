@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.example.code.mapper.goods.UserMapper">
+    <select id="selectUserDetails" resultType="com.example.code.entity.User" >
+        select user_id,user_name,create_time from hh_user_new1 where user_id = #{user_id}
+    </select>
+
+    <update id="updateUserDetails">
+        update hh_user_new set user_name = #{user_name} where user_id = #{user_id}
+    </update>
+
+    <insert id="addUserInfo">
+        insert into hh_user_new1(user_name,create_time) values (#{userName},#{createTime})
+    </insert>
+</mapper>

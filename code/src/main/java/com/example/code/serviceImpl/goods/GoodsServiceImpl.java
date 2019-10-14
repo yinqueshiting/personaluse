@@ -1,12 +1,14 @@
 package com.example.code.serviceImpl.goods;
 
 import com.example.code.config.TexProperties;
+import com.example.code.dto.OrderInputDTO;
 import com.example.code.entity.GoodsOrder;
 import com.example.code.mapper.goods.GoodsMapper;
 import com.example.code.service.goods.GoodsService;
 import com.example.code.utils.CodeMsg;
 import com.example.code.utils.Result;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cache.annotation.CacheConfig;
@@ -44,7 +46,7 @@ public class GoodsServiceImpl implements GoodsService {
     private RedisTemplate<String,String> stringRedisTemplate;
 
     @Override
-    @Cacheable(value = "goodsList",key = "#p0+'-'+#p1")
+    @Cacheable(value = "goodsList",key = "#root.args[0].get('page')+'-'+#root.args[0].get('rows')+'!'")//key = "#root.args[0].p0+'-'+#root.args[0].p1+'!'"
     @Transactional(propagation = Propagation.SUPPORTS)
     public Result selectGoogsList(Map<String, String> paramMap) throws Exception {
         log.info("通过了数据库查询");
@@ -107,25 +109,25 @@ public class GoodsServiceImpl implements GoodsService {
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
-    public Result buyGoodsRedis(Map<String, String> paramMap) throws Exception {
+    public Result buyGoodsRedis(OrderInputDTO orderInputDTO) throws Exception {
         ListOperations listOperations = redisTemplate.opsForList();
-        String goods_id = paramMap.get("goods_id");
+        /*String goods_id = paramMap.get("goods_id");
         String user_id = paramMap.get("user_id");
         String count = paramMap.get("count");
+        */
         //获取缓存中的值
         int total_inventory_int = Integer.parseInt(stringRedisTemplate.opsForValue().get("total_inventory"));
         log.info("total_inventory_int:{}",total_inventory_int);
-        if(listOperations.size("goodsOrder")<=total_inventory_int){
+        if(listOperations.size("goodsOrder")<total_inventory_int){
             GoodsOrder goodsOrder = new GoodsOrder();
-            goodsOrder.setCount(count);
-            goodsOrder.setGoodsId(goods_id);
-            goodsOrder.setUserId(user_id);
+            BeanUtils.copyProperties(orderInputDTO,goodsOrder);
+            log.info("goodsOrder:{}",goodsOrder);
             listOperations.leftPush("goodsOrder", goodsOrder);
             log.info("goodsOrder的长度{}",listOperations.size("goodsOrder"));
             //异步去新增订单与减少库存
            // AsyncOpsGoodsOrder();
-            goodsMapper.addOrderForThisUser(goodsOrder);
-            goodsMapper.reduceInventoryByGoodsId(count, goods_id);
+            //goodsMapper.addOrderForThisUser(goodsOrder);
+            //goodsMapper.reduceI nventoryByGoodsId(count, goods_id);
         }else{
             log.info("库存不足");
             return Result.error(CodeMsg.NO_HAVE_INVENTORY,"库存不足");

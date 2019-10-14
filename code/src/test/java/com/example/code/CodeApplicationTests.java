@@ -15,8 +15,9 @@ public class CodeApplicationTests {
     @Autowired
     private TexProperties texProperties;
     @Test
-    public void contextLoads() throws IOException {
-        System.out.println("*****"+ texProperties.getElement_is_exists() );
+    public void contextLoads() throws Exception {
+
+
     }
 
 }

@@ -1,5 +1,6 @@
 package com.example.code.controller;
 
+import com.example.code.dto.OrderInputDTO;
 import com.example.code.service.goods.GoodsService;
 import com.example.code.utils.Result;
 import lombok.extern.slf4j.Slf4j;
@@ -57,14 +58,14 @@ public class GoodsController {
 
     /**
      * 简单的通过redis的list来操作
-     * @param paramMap
+     * @param
      * @return
      */
     @PostMapping("/buyGoodsRedis")
-    public Result buyGoodsRedis(@RequestBody Map<String,String> paramMap){
-        log.info("简单的通过redis的list来操作:{}",paramMap);
+    public Result buyGoodsRedis(@RequestBody OrderInputDTO orderInputDTO){
+        log.info("简单的通过redis的list来操作:{}",orderInputDTO);
         try{
-            return goodsService.buyGoodsRedis(paramMap);
+            return goodsService.buyGoodsRedis(orderInputDTO);
         }catch (Exception e){
             e.printStackTrace();
         }

@@ -1,5 +1,6 @@
 package com.example.code.controller;
 
+import com.example.code.entity.User;
 import com.example.code.service.SpringData.UserService;
 import com.example.code.service.TestService;
 import com.example.code.service.redis.RedisService;
@@ -31,7 +32,7 @@ public class TestController {
       return Result.success(resMap);
     }*/
 
-    @PostMapping("/findUserById")
+   /* @PostMapping("/findUserById")
     public Result findUserById(@RequestBody Map<String,Integer> paramMap) {
         log.info("paramMap{}" + paramMap);
         int id = paramMap.get("id");
@@ -44,7 +45,7 @@ public class TestController {
            log.error("findUserById 异常信息{}",e);
         }
         return Result.error();
-    }
+    }*/
 
     /**
      * 使用map作为返回
@@ -66,6 +67,38 @@ public class TestController {
     public Result redisTest(){
         try {
              return redisService.redisTest();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Result.error();
+    }
+
+    @PostMapping("/seelctUserDetails")
+    public Result seelctUserDetails(@RequestBody User userMap){
+        try {
+            log.info("seelctUserDetails参数：{}",userMap);
+            return userService.seelctUserDetails(userMap);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Result.error();
+    }
+    @PostMapping("/updateUserDetails")
+    public Result updateUserDetails(@RequestBody User user){
+        try {
+            log.info("updateUserDetails：{}",user);
+            return userService.updateUserDetails(user);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Result.error();
+    }
+
+    @PostMapping("/addUserInfo")
+    public Result addUserInfo(@RequestBody User user){
+        try {
+            log.info("addUserInfo：{}",user);
+            return userService.addUserInfo(user);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -1,5 +1,7 @@
 package com.example.code.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -7,21 +9,28 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Timestamp;
+import java.util.Date;
+
 
 @Entity
-@Table(name = "hh_user")
+@Table(name = "hh_user_new1")
 @Setter
 @Getter
 @ToString
 public class User implements Serializable {
+
+    //给一个serialVersionUID  没有明示的给 报了不一致的错误
+    private static final long serialVersionUID = 6868408329582985501L;
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name = "user_id")
-    private Integer id;
+    private Integer userId;
     @Column(name = "user_name")
-    private String name;
-    @Column(name = "sex")
-    private String sex;
+    private String userName;
+   // @Column(name = "sex")
+    //private String sex;
     @Column(name = "create_time")
-    private String create;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    private Date createTime;
 }

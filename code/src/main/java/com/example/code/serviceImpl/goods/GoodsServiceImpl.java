@@ -76,7 +76,8 @@ public class GoodsServiceImpl implements GoodsService {
         String count = paramMap.get("count");
 
         //查询库存
-        String total_inventory = goodsMapper.selectInventoryByGoodsId(goods_id);
+        String total_inventory = stringRedisTemplate.opsForValue().get("total_inventory");
+        //String total_inventory = goodsMapper.selectInventoryByGoodsId(goods_id);
         //String total_inventory = goodsMapper.selectInventoryByGoodsIdAddForUpdate(goods_id);
         log.info("total_inventory:{}", total_inventory);
         int count_int = Integer.parseInt(count);
@@ -94,7 +95,6 @@ public class GoodsServiceImpl implements GoodsService {
             //开始减少库存
             goodsMapper.reduceInventoryByGoodsId(count, goods_id);
         }
-        //Thread.sleep(521);
 
         return Result.success();
 
@@ -117,6 +117,8 @@ public class GoodsServiceImpl implements GoodsService {
         */
         //获取缓存中的值
         int total_inventory_int = Integer.parseInt(stringRedisTemplate.opsForValue().get("total_inventory"));
+        //测试获取数据库中的值来做比较
+        //int total_inventory_int = Integer.parseInt(goodsMapper.selectInventoryByGoodsId(goods_id));
         log.info("total_inventory_int:{}",total_inventory_int);
         if(listOperations.size("goodsOrder")<total_inventory_int){
             GoodsOrder goodsOrder = new GoodsOrder();
@@ -124,6 +126,8 @@ public class GoodsServiceImpl implements GoodsService {
             log.info("goodsOrder:{}",goodsOrder);
             listOperations.leftPush("goodsOrder", goodsOrder);
             log.info("goodsOrder的长度{}",listOperations.size("goodsOrder"));
+            //total_inventory_int = total_inventory_int-Integer.parseInt(count);
+            //stringRedisTemplate.opsForValue().set("total_inventory", total_inventory_int+"");
             //异步去新增订单与减少库存
            // AsyncOpsGoodsOrder();
             //goodsMapper.addOrderForThisUser(goodsOrder);

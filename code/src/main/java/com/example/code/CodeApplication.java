@@ -12,7 +12,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 @ComponentScan(basePackages = {"com.example.code.*"})
 @MapperScan(basePackages = {"com.example.code.mapper"})
 @ServletComponentScan("com.example.code.filter")
-@EnableCaching
+@EnableCaching //开启注解
 @EnableAsync //开启异步调用
 public class CodeApplication {
 

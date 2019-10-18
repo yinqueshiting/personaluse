@@ -23,7 +23,7 @@ import java.util.Map;
 @RequestMapping("/static")
 public class Login {
 
-    @RequestMapping("/index")
+    @RequestMapping("/toLogin")
     public Result index(){
         Map<String,String> resMap = new HashMap();
         resMap.put("index", "index");
@@ -59,7 +59,7 @@ public class Login {
             subject.login(token);
         }catch (IncorrectCredentialsException e) {
             map.put("code","501");
-            map.put("msg","用户不存在或者密码错误");
+            map.put("msg","密码错误");
             return Result.success(map);
         } catch (LockedAccountException e) {
             map.put("code","502");

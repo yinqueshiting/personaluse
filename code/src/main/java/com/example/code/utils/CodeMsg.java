@@ -23,4 +23,13 @@ public class CodeMsg {
      * 已经存在该元素
      */
     public static String NO_HAVE_INVENTORY = "0004";
+    /**
+     * 去登陆
+     */
+    public static String TO_LOGIN  = "0005";
+
+    /**
+     * 没有权限
+     */
+    public static String NOT_HAVE_PERMISSION  = "0006";
 }

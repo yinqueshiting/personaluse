@@ -28,6 +28,12 @@ public class Result<T> implements Serializable {
     public static Result error(String returnCode,String returnMsg) {
         return new Result(returnCode,returnMsg);
     }
+    public static Result NotHavePer(){
+        return new Result(CodeMsg.NOT_HAVE_PERMISSION, "没有操作权限！");
+    }
+    public static Result toLogin(){
+        return new Result(CodeMsg.TO_LOGIN, "登陆再操作！");
+    }
 
     public Result(String returnCode,String returnMsg){
         this.returnCode=returnCode;

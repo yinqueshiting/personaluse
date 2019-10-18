@@ -6,6 +6,8 @@ import com.example.code.service.TestService;
 import com.example.code.service.redis.RedisService;
 import com.example.code.utils.Result;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.shiro.authz.annotation.Logical;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -74,6 +76,7 @@ public class TestController {
     }
 
     @PostMapping("/seelctUserDetails")
+    @RequiresRoles(value={"ADMIN"})
     public Result seelctUserDetails(@RequestBody User userMap){
         try {
             log.info("seelctUserDetails参数：{}",userMap);

@@ -2,16 +2,18 @@ package com.example.code.config;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
 @Component
-@ConfigurationProperties(prefix = "txt")
+//@ConfigurationProperties(prefix = "txt")
 @PropertySource("classpath:/txt.properties")
 @Setter
 @Getter
 public class TexProperties {
+    @Value("${SUCCESS}")
     private String success;
     private String  exception;
     private String param_is_null;

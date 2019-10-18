@@ -3,7 +3,7 @@
 
 <mapper namespace="com.example.code.mapper.goods.UserMapper">
     <select id="selectUserDetails" resultType="com.example.code.entity.User" >
-        select user_id,user_name,create_time from hh_user_new1 where user_id = #{user_id}
+        select user_id,user_name,create_time from hh_user where user_id = #{user_id}
     </select>
 
     <update id="updateUserDetails">

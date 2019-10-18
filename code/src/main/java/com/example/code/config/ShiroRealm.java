@@ -38,6 +38,7 @@ public class ShiroRealm extends AuthorizingRealm {
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
         SysUser sysUser = (SysUser) principalCollection.getPrimaryPrincipal();
+        log.info("当前的登陆人:{}", sysUser);
         //保存 角色和权限的 Set集合
         Set<String> roleSet = new HashSet<>();
         Set<String> menuSet = new HashSet<>();
@@ -54,6 +55,8 @@ public class ShiroRealm extends AuthorizingRealm {
         //将查到的权限和角色分别传入authorizationInfo中
         authorizationInfo.setStringPermissions(menuSet);
         authorizationInfo.setRoles(roleSet);
+        log.info("查询我权限{}",menuSet);
+        log.info("查询我的角色{}",roleSet);
         return authorizationInfo;
     }
 
@@ -68,7 +71,6 @@ public class ShiroRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
        //获取当前登陆人的名称
         String username = (String)authenticationToken.getPrincipal();
-        log.info("不知道是啥：{}", authenticationToken.getCredentials());
         //根据名称去查询此人
         SysUser sysUser = sysUserService.selectUserInfo(username);
         log.info("sysUser:{}", sysUser);
@@ -82,7 +84,7 @@ public class ShiroRealm extends AuthorizingRealm {
         }
         //进行验证
         SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(
-                sysUser,                                  //用户名
+                sysUser,                                  //当前用户
                 sysUser.getPassword(),                    //密码
                 ByteSource.Util.bytes(sysUser.getSalt()), //设置盐值
                 getName()

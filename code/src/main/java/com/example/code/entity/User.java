@@ -14,7 +14,7 @@ import java.util.Date;
 
 
 @Entity
-@Table(name = "hh_user_new1")
+@Table(name = "hh_user")
 @Setter
 @Getter
 @ToString
@@ -32,5 +32,5 @@ public class User implements Serializable {
     //private String sex;
     @Column(name = "create_time")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
-    private Date createTime;
+    private String createTime;
 }

@@ -25,10 +25,7 @@ public class Login {
 
     @RequestMapping("/toLogin")
     public Result index(){
-        Map<String,String> resMap = new HashMap();
-        resMap.put("index", "index");
-        log.info("调用了index接口");
-        return Result.success(resMap);
+        return Result.toLogin();
     }
 
     @RequestMapping("/success")
@@ -39,11 +36,11 @@ public class Login {
         return Result.success(resMap);
     }
 
-    @RequestMapping("/error")
-    public Result error(){
+    @RequestMapping("/unAuthorized")
+    public Result unAuthorized(){
         Map<String,String> resMap = new HashMap();
-        resMap.put("error", "error");
-        log.info("调用了error接口");
+        resMap.put("unAuthorized", "unAuthorized");
+        log.info("调用了unAuthorized接口");
         return Result.success(resMap);
     }
 

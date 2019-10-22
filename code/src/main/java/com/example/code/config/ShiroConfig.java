@@ -3,10 +3,16 @@ package com.example.code.config;
 import com.example.code.utils.SHA256Util;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.realm.AuthorizingRealm;
+import org.apache.shiro.session.mgt.SessionManager;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
+import org.crazycake.shiro.RedisCacheManager;
+import org.crazycake.shiro.RedisManager;
+import org.crazycake.shiro.RedisSessionDAO;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -19,6 +25,17 @@ import java.util.Map;
  **/
 @Configuration
 public class ShiroConfig {
+
+    private final int EXPIRE = 1800;
+    //Redis配置
+    @Value("${spring.redis.host}")
+    private String host;
+    @Value("${spring.redis.port}")
+    private int port;
+    @Value("${spring.redis.timeout}")
+    private int timeout;
+    @Value("${spring.redis.password}")
+    private String password;
     /**
      * 首先配置拦截规则
      * @param securityManager
@@ -29,7 +46,7 @@ public class ShiroConfig {
         System.out.println("ShiroConfiguration.shirFilter()");
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(securityManager);
-        //拦截器.
+        //拦截器. LinkedHashMap保证添加时的顺序
         Map<String,String> filterChainDefinitionMap = new LinkedHashMap<String,String>();
         // 配置不会被拦截的链接 可以理解为任何人都可以访问
         filterChainDefinitionMap.put("/static/**", "anon");
@@ -43,7 +60,9 @@ public class ShiroConfig {
         // 登录成功后要跳转的链接
         //shiroFilterFactoryBean.setSuccessUrl("/success");
         //未授权界面;
-       // shiroFilterFactoryBean.setUnauthorizedUrl("/error");
+        //shiroFilterFactoryBean.setUnauthorizedUrl("static/unAuthorized");
+        //如果要动态的配置接口的权限 可以将接口需要的权限加到数据库或properties(yml)中读取出来 然后循环放到filterChainDefinitionMap中
+       // filterChainDefinitionMap.put(perm.get("url"),perm.get("permission"))
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;
     }
@@ -68,9 +87,9 @@ public class ShiroConfig {
     public SecurityManager securityManager(){
         DefaultWebSecurityManager securityManager =  new DefaultWebSecurityManager();
         //自定义Session管理
-        //securityManager.setSessionManager(sessionManager());
+        securityManager.setSessionManager(sessionManager());
         // 自定义Cache实现
-       //securityManager.setCacheManager(cacheManager());
+       securityManager.setCacheManager(cacheManagers());
         //自定义Realm验证
         securityManager.setRealm(ShiroRealm());
         return securityManager;
@@ -103,5 +122,61 @@ public class ShiroConfig {
         AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
         authorizationAttributeSourceAdvisor.setSecurityManager(securityManager);
         return authorizationAttributeSourceAdvisor;
+    }
+
+    /**
+     * 配置Redis管理器
+     * @Attention 使用的是shiro-redis开源插件
+     * @Author Sans
+     * @CreateTime 2019/6/12 11:06
+     */
+    @Bean
+    public RedisManager redisManager() {
+        RedisManager redisManager = new RedisManager();
+        redisManager.setHost(host);
+        redisManager.setPort(port);
+        redisManager.setTimeout(timeout);
+        redisManager.setPassword(password);
+        return redisManager;
+    }
+
+    /**
+     * 配置Cache管理器
+     * 用于往Redis存储权限和角色标识
+     * @Attention 使用的是shiro-redis开源插件
+     * @Author Sans
+     * @CreateTime 2019/6/12 12:37
+     */
+    @Bean
+    public RedisCacheManager cacheManagers() {
+        RedisCacheManager redisCacheManager = new RedisCacheManager();
+        redisCacheManager.setRedisManager(redisManager());
+        // 配置缓存的话要求放在session里面的实体类必须有个id标识
+        redisCacheManager.setPrincipalIdFieldName("userId");
+        return redisCacheManager;
+    }
+    /**
+     * 配置RedisSessionDAO
+     * @Attention 使用的是shiro-redis开源插件
+     * @Author Sans
+     * @CreateTime 2019/6/12 13:44
+     */
+    @Bean
+    public RedisSessionDAO redisSessionDAO() {
+        RedisSessionDAO redisSessionDAO = new RedisSessionDAO();
+        redisSessionDAO.setRedisManager(redisManager());
+        redisSessionDAO.setExpire(EXPIRE);
+        return redisSessionDAO;
+    }
+    /**
+     * 配置Session管理器
+     * @Author Sans
+     * @CreateTime 2019/6/12 14:25
+     */
+    @Bean
+    public SessionManager sessionManager() {
+        DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
+        sessionManager.setSessionDAO(redisSessionDAO());
+        return sessionManager;
     }
 }

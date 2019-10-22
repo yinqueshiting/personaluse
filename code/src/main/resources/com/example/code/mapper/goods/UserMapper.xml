@@ -7,10 +7,10 @@
     </select>
 
     <update id="updateUserDetails">
-        update hh_user_new set user_name = #{user_name} where user_id = #{user_id}
+        update hh_user set user_name = #{user_name} where user_id = #{user_id}
     </update>
 
     <insert id="addUserInfo">
-        insert into hh_user_new1(user_name,create_time) values (#{userName},#{createTime})
+        insert into hh_user(user_name,create_time) values (#{userName},#{createTime})
     </insert>
 </mapper>

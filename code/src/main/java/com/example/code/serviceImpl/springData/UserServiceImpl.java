@@ -1,7 +1,7 @@
 package com.example.code.serviceImpl.springData;
 
 import com.alibaba.fastjson.JSONObject;
-import com.example.code.entity.User;
+import com.example.code.entity.HhUser;
 import com.example.code.jpa.UserRepository;
 import com.example.code.mapper.goods.UserMapper;
 import com.example.code.service.SpringData.UserService;
@@ -45,7 +45,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Result findUserReturnMap(String name) {
-        List<User> userList = userRepository.findByNameLike(name);
+        List<HhUser> userList = userRepository.findByNameLike(name);
         return Result.success(userList);
     }
 
@@ -58,12 +58,12 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional(propagation = Propagation.SUPPORTS)
     @Cacheable(value = "userDetail",key = "#root.args[0].userId")
-    public Result seelctUserDetails(User userMap) throws Exception {
+    public Result seelctUserDetails(HhUser userMap) throws Exception {
         int user_id = userMap.getUserId();
         if(StringUtils.isEmpty(user_id)){
 
         }
-        User userDetails = userMapper.selectUserDetails(user_id);
+        HhUser userDetails = userMapper.selectUserDetails(user_id);
         log.info("userDetails:{}",userDetails);
         return Result.success(userDetails);
     }
@@ -71,7 +71,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
     @CachePut(value = "userDetail",key = "#root.args[0].userId")
-    public Result updateUserDetails(User user) throws Exception {
+    public Result updateUserDetails(HhUser user) throws Exception {
         log.info("修改基本信息");
         int user_id = user.getUserId();
         String user_name = user.getUserName();
@@ -81,11 +81,24 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
-    public Result addUserInfo(User user) throws Exception {
+    public Result addUserInfo(HhUser user) throws Exception {
         //用java获取当前时间 是否是当前时区
         LocalDateTime now = LocalDateTime.now();
         log.info("获取本地的时间：{}",now);
         userMapper.addUserInfo(user);
         return null;
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED)
+    public Result addUserMenu(int role_id, int menu_id) throws Exception {
+        userMapper.addUserMenu(role_id,menu_id);
+        return  Result.success();
+    }
+
+    @Override
+    public Result updateUserName(String userU, int i) throws Exception {
+        userMapper.updateUserName(userU,i);
+        return  Result.success();
     }
 }

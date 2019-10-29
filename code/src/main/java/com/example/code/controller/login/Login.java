@@ -43,6 +43,22 @@ public class Login {
         log.info("调用了unAuthorized接口");
         return Result.success(resMap);
     }
+    /**
+     * @Description 用户点击注销，从缓存中清除用户sessionid以及权限
+     * @Param
+     * @return
+     * @Date 2019/10/23 11:13
+     * @Created by xg
+     */
+    @RequestMapping("/logout")
+    public Result logout(){
+        //用户注销
+        SecurityUtils.getSubject().logout();
+        Map<String,String> resMap = new HashMap();
+        resMap.put("logout", "logout");
+        log.info("调用了logout接口");
+        return Result.success(resMap);
+    }
 
     @RequestMapping("/userlogin")
     public Result userlogin(@RequestBody SysUser sysUser){
@@ -74,6 +90,7 @@ public class Login {
         map.put("code","000");
         map.put("msg","登录成功");
         //map.put("token",ShiroUtils.getSession().getId().toString());
+        log.info("每次登陆的sessionid:{}", SecurityUtils.getSubject().getSession().getId().toString());
         return Result.success(map);
     }
 }

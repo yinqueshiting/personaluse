@@ -1,6 +1,7 @@
 package com.example.code.entity;
 
 import com.alibaba.fastjson.annotation.JSONField;
+import com.baomidou.mybatisplus.annotations.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,7 +19,7 @@ import java.util.Date;
 @Setter
 @Getter
 @ToString
-public class User implements Serializable {
+public class HhUser implements Serializable {
 
     //给一个serialVersionUID  没有明示的给 报了不一致的错误
     private static final long serialVersionUID = 6868408329582985501L;

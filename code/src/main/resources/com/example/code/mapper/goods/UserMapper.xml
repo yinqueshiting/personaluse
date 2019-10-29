@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
 <mapper namespace="com.example.code.mapper.goods.UserMapper">
-    <select id="selectUserDetails" resultType="com.example.code.entity.User" >
+    <select id="selectUserDetails" resultType="com.example.code.entity.HhUser" >
         select user_id,user_name,create_time from hh_user where user_id = #{user_id}
     </select>
 
@@ -13,4 +13,12 @@
     <insert id="addUserInfo">
         insert into hh_user(user_name,create_time) values (#{userName},#{createTime})
     </insert>
+
+    <insert id="addUserMenu">
+        insert into sys_role_menu (role_id, menu_id) values (#{role_id},#{menu_id})
+    </insert>
+
+    <update id="updateUserName">
+        update sys_user  set username = #{username} where user_id = #{user_id}
+    </update>
 </mapper>

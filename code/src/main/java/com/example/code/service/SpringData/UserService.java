@@ -1,6 +1,7 @@
 package com.example.code.service.SpringData;
 
-import com.example.code.entity.User;
+import com.example.code.entity.HhUser;
+import com.example.code.entity.HhUser;
 import com.example.code.utils.Result;
 import org.springframework.stereotype.Service;
 
@@ -11,9 +12,13 @@ public interface UserService {
    // Result findUserById(int id)throws Exception;
     Result findUserReturnMap(String name);
 
-    Result seelctUserDetails(User userMap)throws Exception;
+    Result seelctUserDetails(HhUser userMap)throws Exception;
 
-    Result updateUserDetails(User user)throws Exception;
+    Result updateUserDetails(HhUser user)throws Exception;
 
-    Result addUserInfo(User user)throws Exception;
+    Result addUserInfo(HhUser user)throws Exception;
+
+    Result addUserMenu(int role_id, int menu_id)throws Exception;
+
+    Result updateUserName(String userU, int i)throws Exception;
 }

@@ -28,13 +28,9 @@ public class ShiroRealm extends AuthorizingRealm {
 
     @Autowired
     private SysUserService sysUserService;
-    /**
-     * @Description 授权 相当于去查询此人的角色 和 权限
-     * @Param
-     * @return
-     * @Date 2019/10/17 9:42
-     * @Created by xg
-     */
+
+     //@Description 授权 相当于去查询此人的角色 和 权限
+
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
@@ -61,13 +57,8 @@ public class ShiroRealm extends AuthorizingRealm {
         return authorizationInfo;
     }
 
-    /**
-     * @Description 认证 相当于登陆
-     * @Param
-     * @return
-     * @Date 2019/10/17 14:02
-     * @Created by xg
-     */
+    //@Description 认证 相当于登陆
+
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
        //获取当前登陆人的名称

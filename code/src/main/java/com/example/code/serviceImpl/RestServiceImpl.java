@@ -1,7 +1,7 @@
 package com.example.code.serviceImpl;
 
 
-import com.example.code.entity.User;
+import com.example.code.entity.HhUser;
 import com.example.code.service.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +23,7 @@ public class RestServiceImpl implements TestService {
     }*/
 
     @Override
-    public List<User> findUserListByMeetId(String meet_id) {
+    public List<HhUser> findUserListByMeetId(String meet_id) {
         return null;
     }
 

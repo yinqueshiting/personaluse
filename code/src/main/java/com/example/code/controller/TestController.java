@@ -1,6 +1,6 @@
 package com.example.code.controller;
 
-//import com.example.code.config.ShiroRealm;
+import com.example.code.config.ShiroRealm;
 import com.example.code.config.SpringUtil;
 import com.example.code.entity.SysUser;
 import com.example.code.entity.HhUser;
@@ -24,9 +24,14 @@ import org.crazycake.shiro.RedisSessionDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.IOException;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Objects;
@@ -185,7 +190,7 @@ public class TestController {
      * @Date 2019/10/24 14:08
      * @Created by xg
      */
-   /* @PostMapping("/updateUserMenuBySecurity")
+    @PostMapping("/updateUserMenuBySecurity")
     public Result updateUserMenuBySecurity(@RequestBody HhUser HhUser){
         RealmSecurityManager rsm = (RealmSecurityManager) SecurityUtils.getSecurityManager();
         ShiroRealm myShiroRealm = (ShiroRealm) rsm.getRealms().iterator().next();
@@ -213,5 +218,38 @@ public class TestController {
             e.printStackTrace();
         }
         return Result.success();
-    }*/
+    }
+
+    /**
+     * @Description 文件上传
+     * @Param
+     * @return
+     * @Date 2019/10/31 9:44
+     * @Created by xg
+     */
+    @PostMapping("/fileUpload")
+    public Result fileUpload(@RequestParam("files") MultipartFile[] files , HttpServletRequest request){
+        log.info("Multipart files:{}",files);
+        //获取项目在容器中的路径
+        String fileRootPath = request.getServletContext().getRealPath("/");
+        String filePath = null;
+        for (MultipartFile file : files){
+            // 上传简单文件名
+            String originalFilename = file.getOriginalFilename();
+            // 存储路径
+            filePath = new StringBuilder(fileRootPath)
+                    .append(System.currentTimeMillis())
+                    .append(originalFilename)
+                    .toString();
+            try {
+                // 保存文件
+                file.transferTo(new File(filePath));
+                //将文件目录\\替换为\
+                filePath.replace("\\\\", "\\");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return Result.success(filePath);
+    }
 }

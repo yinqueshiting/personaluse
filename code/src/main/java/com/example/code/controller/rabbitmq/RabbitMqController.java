@@ -46,7 +46,7 @@ public class RabbitMqController {
    @PostMapping("/directExchangeTest")
    public Result directExchangeTest(){
        log.info(" directExchangeTest do Something:{}", "开始生产一个消息");
-       directProducer.send(RabbitConfig.DIRECT_ROUTINGKEY1, "directExchange开始发送消息");
+       directProducer.send(RabbitConfig.DIRECT_ROUTINGKEY2, "directExchange开始发送消息");
        return Result.success();
    }
 }

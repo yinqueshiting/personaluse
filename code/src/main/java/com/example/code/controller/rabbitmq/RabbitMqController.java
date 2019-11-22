@@ -1,6 +1,7 @@
 package com.example.code.controller.rabbitmq;
 
 import com.alibaba.fastjson.JSON;
+import com.example.code.queue.direct.DirectDelayProducer;
 import com.example.code.queue.direct.DirectProducer;
 import com.example.code.queue.fanout.FanoutProducer;
 import com.example.code.queue.topic.TopicProducer;
@@ -33,6 +34,9 @@ public class RabbitMqController {
 
     @Autowired
     private TopicProducer topicProducer;
+
+    @Autowired
+    private DirectDelayProducer directDelayProducer;
 
 /**
      * @Description 测试fanout交换机
@@ -82,4 +86,18 @@ public class RabbitMqController {
        log.info("topic交换机消息开始发送");
        return Result.success();
    }
+
+    /**
+     * @Description 测试topic类型的交换机
+     * @Param
+     * @return
+     * @Date 2019/11/14 14:45
+     * @Created by xg
+     */
+    @PostMapping("/delayTest/{stringJson}")
+    public Result delayTest(@PathVariable String stringJson){
+        directDelayProducer.delaySend(stringJson,3000);
+        log.info("延时消息");
+        return Result.success();
+    }
 }

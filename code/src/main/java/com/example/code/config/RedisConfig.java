@@ -1,9 +1,11 @@
 package com.example.code.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.listener.RedisMessageListenerContainer;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
@@ -36,6 +38,25 @@ public class RedisConfig {
         template.afterPropertiesSet();
         return template;
     }
+    //设置key过期时间监听
+    @Autowired
+    private RedisConnectionFactory redisConnectionFactory;
 
+    @Bean
+    public RedisMessageListenerContainer redisMessageListenerContainer() {
+        RedisMessageListenerContainer  redisMessageListenerContainer = new RedisMessageListenerContainer ();
+        redisMessageListenerContainer.setConnectionFactory(redisConnectionFactory);
+        return redisMessageListenerContainer;
+    }
+    /**
+     * @Description RedisKeyExpiredListener:自己创建的用于监听key的class
+     * @return
+     * @Date 2019/12/7 14:21
+     * @Created by xg
+     */
+    @Bean
+    public RedisKeyExpiredListener keyExpiredListener() {
+        return new RedisKeyExpiredListener(this.redisMessageListenerContainer());
+    }
 
 }

@@ -22,6 +22,7 @@ import org.apache.shiro.subject.support.DefaultSubjectContext;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.crazycake.shiro.RedisSessionDAO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,6 +36,7 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 @RestController
 @Slf4j
@@ -47,13 +49,21 @@ public class TestController {
     @Autowired
     private RedisService redisService;
 
+    @Autowired
+    private RedisTemplate redisTemplate;
+
     private static RedisSessionDAO redisSessionDAO = SpringUtil.getBean(RedisSessionDAO.class);
     /*@PostMapping("/test")
     public Result test(@RequestBody Map paramMap){
       Map resMap = testService.test();
       return Result.success(resMap);
     }*/
-
+    @PostMapping("/test")
+    public Result test(@RequestBody Map paramMap){
+        redisTemplate.opsForValue().set("key:expireKey:key1", "yoyyoyoyowww");
+        redisTemplate.expire("key:expireKey:key1", 20, TimeUnit.SECONDS);
+       return  Result.success();
+    }
    /* @PostMapping("/findUserById")
     public Result findUserById(@RequestBody Map<String,Integer> paramMap) {
         log.info("paramMap{}" + paramMap);

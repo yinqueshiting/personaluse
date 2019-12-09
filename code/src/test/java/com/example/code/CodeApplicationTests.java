@@ -1,19 +1,32 @@
 package com.example.code;
 
 import com.example.code.config.TexProperties;
+import com.example.code.entity.HhUser;
 import com.example.code.entity.SysUser;
+import com.example.code.mapper.mybatisplus.MyBatisPlusMapper;
+import com.example.code.service.mybatisplus.MyBatisPlusService;
 import com.example.code.service.shiro.SysUserService;
+import com.example.code.serviceImpl.mybatisplus.MyBatisPlusServiceImpl;
+import com.example.code.serviceImpl.mybatisplus.MyBatisPlusServiceImpl2;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.session.Session;
+import org.apache.shiro.subject.PrincipalCollection;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Primary;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
 import javax.annotation.Resources;
 import java.io.IOException;
 import java.util.ResourceBundle;
+import java.util.Set;
+
+import static org.apache.shiro.SecurityUtils.getSubject;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -25,18 +38,20 @@ public class CodeApplicationTests {
     @Autowired
     private SysUserService sysUserService;
 
+    @Autowired
+    @Qualifier(value = "s1")
+    private MyBatisPlusService ss;
+
+    @Resource(name = "s2")
+    private MyBatisPlusServiceImpl2 ss2;
     @Test
     public void contextLoads() throws Exception {
-        /*SysUser sysUser = sysUserService.selectUserInfo("admin");
-        log.info("user:{}", sysUser);
-        log.info("用户角色集合：{}", sysUserService.selectRoleByUserId(2));
-        log.info("用户权限集合：{}", sysUserService.selelctMenuByRoleId(2));
-    */
-        System.out.println("??:"+new String(texProperties.getSuccess().getBytes("ISO-8859-1"),"GBK"));
-        System.out.println("??:"+texProperties.getNo_hava_iinventory());
-        ResourceBundle resource =  ResourceBundle.getBundle("txt");
-        String title1 = new String( resource.getString("ELEMENT_IS_EXISTS").getBytes("ISO-8859-1"),"GBK");
-        System.out.println(title1);
+       String A = new String("str");
+       String B = new String("str");
+       String C = "str";
+       B.intern();
+        System.out.println(B==C);
+        System.out.println(B==A);
     }
 
 }

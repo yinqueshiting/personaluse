@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Primary;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
@@ -27,31 +28,15 @@ import java.util.ResourceBundle;
 import java.util.Set;
 
 import static org.apache.shiro.SecurityUtils.getSubject;
-
-@RunWith(SpringRunner.class)
+//引入spring对junit4的支持
+@RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
 @Slf4j
 public class CodeApplicationTests {
-    @Autowired
-    private TexProperties texProperties;
 
-    @Autowired
-    private SysUserService sysUserService;
 
-    @Autowired
-    @Qualifier(value = "s1")
-    private MyBatisPlusService ss;
-
-    @Resource(name = "s2")
-    private MyBatisPlusServiceImpl2 ss2;
     @Test
-    public void contextLoads() throws Exception {
-       String A = new String("str");
-       String B = new String("str");
-       String C = "str";
-       B.intern();
-        System.out.println(B==C);
-        System.out.println(B==A);
+    public void test(){
+        System.out.println("hello world");
     }
-
 }

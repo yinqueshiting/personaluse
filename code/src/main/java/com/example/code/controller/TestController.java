@@ -157,6 +157,7 @@ public class TestController {
             //从缓存中获取Session
             Session session = null;
             Collection<Session> sessions = redisSessionDAO.getActiveSessions();
+
             SysUser sysUserEntity;
             Object attribute = null;
             for(Session sessionInfo : sessions){

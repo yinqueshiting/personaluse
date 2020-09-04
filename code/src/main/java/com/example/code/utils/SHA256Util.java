@@ -7,7 +7,7 @@ import org.apache.shiro.crypto.hash.SimpleHash;
  * @create: 2019-10-17 17:53
  **/
 public class SHA256Util {
-//*  私有构造器 *
+//*         私有构造器 *
 
         private SHA256Util(){};
 //*  加密算法 *
